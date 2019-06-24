@@ -27,23 +27,23 @@ public class Swarm {
     }
 
     public static void main(String[] args) {
-        Swarm swarm = new Swarm(50, Function.FunctionType.ThreeHump);
+        Swarm swarm = new Swarm(1000, Function.FunctionType.ShubertFunction);
         swarm.run();
     }
 
     private void run() {
-        for (int i = 0; i < 50; i++) {
-            Function.FunctionType simpleFunction = functionType;
-            double currentValue = Function.eval(bestSwarmPosition, simpleFunction);
+        for (int i = 0; i < 1000; i++) {
+            Function.FunctionType functionType = this.functionType;
+            double currentValue = Function.eval(bestSwarmPosition, functionType);
             System.out.println(currentValue);
             for (Particle particle : particles) {
                 particle.updateNewPosition(this);
-                double eval = Function.eval(particle.getPosition(), simpleFunction);
-                double eval1 = Function.eval(particle.getBestKnownPosition(), simpleFunction);
+                double eval = Function.eval(particle.getPosition(), functionType);
+                double eval1 = Function.eval(particle.getBestKnownPosition(), functionType);
                 if (eval < eval1) {
                     particle.updateBestKnownPosition();
                 }
-                double eval2 = Function.eval(bestSwarmPosition, simpleFunction);
+                double eval2 = Function.eval(bestSwarmPosition, functionType);
                 if (eval < eval2) {
                     bestSwarmPosition = particle.getPosition().clone();
                     System.out.println("Update swarm best position");
@@ -54,7 +54,7 @@ public class Swarm {
 
     }
 
-    private Vector getBestSwarmPosition() {
+    public Vector getBestSwarmPosition() {
         if (bestSwarmPosition != null) {
             return bestSwarmPosition;
         }

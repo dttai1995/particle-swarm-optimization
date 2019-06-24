@@ -1,0 +1,4 @@
+
+message HelloResponse {
+    string greeting = 1;
+}

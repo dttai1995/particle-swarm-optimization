@@ -1,0 +1,4 @@
+message HelloRequest {
+    string firstname = 1;
+    string lastname = 2;
+}
